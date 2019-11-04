@@ -15,7 +15,7 @@ import numpy  as np
 # the model is trained on 16kHz audio
 model_srate = 16000
 
-def build_model(learning_rate=0.0002, weightsFile=None, inputSize=993, dropout = 0, training = True):
+def build_model(learning_rate=0.0002, weightsFile=None, inputSize=993, dropout = 0, training = False):
     '''
     :param learning_rate:
     :param weightsFile:
