@@ -36,6 +36,7 @@ Below are the results of our evaluations comparing our models to the SEDREAMS an
 Our synthetic speech database has been created by resynthesizing the BREF [2] and TIMIT [3] databases using the PAN synthesis engine, described in [4, Section 3.5.2].
 
 ## Example command-line usage (using provided pretrained models)
+TODO
 <!--
 #### Default analysis : This will run the FCN-993 model and output the result as a csv file in the same folder than the input file (replacing the file extension by ".csv")
 python /path_to/FCN-f0/FCN_GCI.py /path_to/test.wav
