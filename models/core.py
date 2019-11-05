@@ -20,12 +20,13 @@ model_srate = 16000
 
 def build_model(learning_rate=0.0002, weightsFile=None, inputSize=993, dropout = 0, training = False):
     '''
-    :param learning_rate:
-    :param weightsFile:
-    :param inputSize:
-    :param dropout:
-    :param training:
-    :return:
+    Build the FCN model (both for training or inference, though at inference the model could be loaded from a json file instead)
+    :param learning_rate: initial learning rate. Used only for training
+    :param weightsFile: file containing the weights of the model (hdf5 format), when loading a pre-trained model
+    :param inputSize: minimum input size for the model to predict something
+    :param dropout: if 1, use dropout in training (not used in our work, but kept here as an option)
+    :param training: In our code for training, data shape is handled a bit differently than for inference, so need to specify if we want to train or use the model
+    :return: compiled model (possibly loaded with weights of pre-trained model if weightsFile is specified)
     '''
 
     from keras.layers import Input, Reshape, Conv2D, BatchNormalization, MaxPool2D, Dropout
@@ -76,9 +77,12 @@ def build_model(learning_rate=0.0002, weightsFile=None, inputSize=993, dropout =
     return model
 
 
-def load_model(modelName, from_json = False):
+def load_model(modelName = 'FCN_synth_GF', from_json = False):
     '''
     build model or load it from json file and load corresponding weights from hdf5 file, according to given model name
+    :param modelName: name of the model to be used (default is FCN_synth_GF)
+    :param from_json: If true, load the model from a json file instead of using the build_model function
+    :return: compiled model loaded with weights corresponding to given pre-trained model name
     '''
 
     curDir = os.path.dirname(os.path.abspath(__file__))
@@ -115,6 +119,9 @@ def load_model(modelName, from_json = False):
 
 
 if __name__ == '__main__':
+    '''
+    View model summary
+    '''
     # model = build_model()
     # inputSize = None
     inputSize = 993
