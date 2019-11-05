@@ -10,8 +10,14 @@ import re
 # model is trained for a sampling rate of 16000Hz
 model_sr = 16000.
 
-def normalize_snd_file(inSnd, level = 3):
-    normSdn = XXX
+def db2lin(vec) :
+    return 10**(vec/20.)
+
+def normalize_snd_file(inSnd, level = -3):
+    maxValIn = np.max(np.abs(inSnd))
+    maxValOut = db2lin(level)
+    scaleFactor = maxValOut / maxValIn
+    normSnd = inSnd * scaleFactor
     return normSnd
 
 def segment_sound(snd, segDuration = 60., frame_sizes = 993, totalNetworkPoolingFactor = 8):
@@ -110,7 +116,7 @@ def get_audio(sndFile, model_input_size = 993):
         from resampy import resample
         audio = resample(audio, sr, model_sr)
 
-    # TODO : normalize sound file (to -3dB max, as is done in SVP, but re-implement in python)
+    audio = normalize_snd_file(audio)
 
     # pad so that frames are centered around their timestamps (i.e. first frame is zero centered).
     audio = np.pad(audio, int(model_input_size//2), mode='constant', constant_values=0)
