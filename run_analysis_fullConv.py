@@ -203,7 +203,7 @@ if __name__ == '__main__':
     ############################################# Command-line interface : #############################################
     ####################################################################################################################
     from argparse import ArgumentParser
-    parser = ArgumentParser(description="run analysis of a given model on a given database")
+    parser = ArgumentParser(description="run prediction of target shape using the given model on given files or directory")
 
     global_args = parser.add_argument_group('global')
     parser.add_argument('-i', "--input", nargs='+', default='./examples/speech16k-norm', help='path to one ore more WAV file(s) to analyze OR can be a directory')
