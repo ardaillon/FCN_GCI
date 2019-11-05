@@ -1,11 +1,12 @@
 # FCN_GCI
 Detection of GCIs from raw speech signals using a fully-convolutional network (FCN)
 
-Code for running Glottal Closure Instants (GCI) detection using the fully-convolutional neural network models described in the publication :
+Code for running Glottal Closure Instants (GCI) detection using the fully-convolutional neural network models described in the following publication :
+> [GCI detection from raw speech using a fully-convolutional network](https://arxiv.org/abs/1910.10235)<br>
+> Luc Ardaillon, Axel Roebel.<br>
+> Submitted on arxiv on 22 Oct 2019.
 
-L. Ardaillon and A. Roebel, "GCI detection from raw speech using a fully-convolutional network".
-
-We kindly request academic publications making use of our FCN models to cite this paper, which can be dowloaded from the following url : https://arxiv.org/abs/1910.10235
+We kindly request academic publications making use of our FCN models to cite the aforementioned paper.
 
 ## Description
 The code provided in this repository aims at performing GCI dectection using a Fully-Convolutional Neural Network.
