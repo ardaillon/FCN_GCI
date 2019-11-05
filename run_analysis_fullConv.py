@@ -1,9 +1,23 @@
+"""
+adapted from original CREPE and FCN-f0 repositories at:
+https://github.com/marl/crepe
+https://github.com/ardaillon/FCN-f0/
+
+original articles:
+"CREPE: A Convolutional Representation for Pitch Estimation", 2018, (Kim, Jong Wook; Salamon, Justin; Li, Peter; Bello, Juan Pablo)
+"Fully-Convolutional Network for Pitch Estimation of Speech Signals", Interspeech 2019, (Ardaillon, Luc; Roebel, Axel)
+
+Code for running analysis on files
+
+modified by Luc Ardaillon: 05/11/2019
+"""
+
 import os
 import sys
 import numpy as np
 from pysndfile import sndio
 import warnings
-from models.load_model import load_model
+from models.core import load_model
 import re
 
 # model is trained for a sampling rate of 16000Hz
