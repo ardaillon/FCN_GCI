@@ -19,6 +19,8 @@ from pysndfile import sndio
 import warnings
 from models.core import load_model
 import re
+from target_to_GCI import get_gci_times
+from fileio.sdif import mrk
 
 # model is trained for a sampling rate of 16000Hz
 model_sr = 16000.
@@ -89,6 +91,11 @@ def run_prediction(filename, output = None, modelTag = 'FCN_synth_tri', verbose 
     else:
         model = load_model(modelTag)
 
+    if(modelTag=='FCN_synth_GF'):
+        mode = 'GF'
+    else:
+        mode = 'triangle'
+
     files = []
     for path in filename:
         if os.path.isdir(path):
@@ -116,7 +123,7 @@ def run_prediction(filename, output = None, modelTag = 'FCN_synth_tri', verbose 
         if verbose:
             print('FCN_GCI: Processing {} ... ({}/{})'.format(
                 file, i+1, len(files)), file=sys.stderr)
-        run_prediction_on_file(file, output=output, model=model, verbose=verbose)
+        run_prediction_on_file(file, output=output, model=model, mode=mode, verbose=verbose)
     return
 
 
@@ -174,7 +181,7 @@ def get_output_path(file, suffix, output_dir):
     return path
 
 
-def run_prediction_on_file(inFile, output=None, model=None, maxSndSegLenSec = 60, model_input_size = 993, totalNetworkPoolingFactor = 8, verbose=True):
+def run_prediction_on_file(inFile, output=None, model=None, mode = 'GF', maxSndSegLenSec = 60, model_input_size = 993, totalNetworkPoolingFactor = 8, verbose=True):
     '''
     Run the prediction of target waveform on input file
     :param file: full path to the file to be analyzed
@@ -206,7 +213,7 @@ def run_prediction_on_file(inFile, output=None, model=None, maxSndSegLenSec = 60
     time_target = np.arange(len(snd)-model_input_size+1)
     interpType = 'cubicSpline'
     if(interpType == 'linear'):
-        activations = np.interp(time_target, time_src, activations)
+        targetPred = np.interp(time_target, time_src, activations)
     elif(interpType=='cubicSpline'):
         from scipy.interpolate import CubicSpline
         if(np.isnan(activations).any()):
@@ -215,17 +222,20 @@ def run_prediction_on_file(inFile, output=None, model=None, maxSndSegLenSec = 60
             time_src = time_src[noNaN_ids]
             activations = activations[noNaN_ids]
         interpolator = CubicSpline(time_src, activations)
-        activations = interpolator(time_target)
-
+        targetPred = interpolator(time_target)
 
     targetFile = get_output_path(inFile, ".targetPred.wav", output)
-
     outputDir = os.path.dirname(targetFile)
     if(not os.path.isdir(outputDir)):
         os.makedirs(outputDir)
-
     print("saving target shape analysis to file "+targetFile)
-    sndio.write(targetFile, activations, model_sr, 'wav', enc)
+    sndio.write(targetFile, targetPred, model_sr, 'wav', enc)
+
+    GCI_times = get_gci_times(targetPred, model_sr, mode=mode)
+
+    GCIFile = targetFile.replace('.targetPred.wav', '.GCI.sdif')
+    print("saving GCI markers in file "+GCIFile)
+    mrk.store(GCIFile, GCI_times, ['GCI'] * len(GCI_times))
 
     return
 
@@ -239,7 +249,7 @@ if __name__ == '__main__':
 
     global_args = parser.add_argument_group('global')
     parser.add_argument('-i', "--input", nargs='+', default='./examples/speech16k-norm', help='path to one ore more WAV file(s) to analyze OR can be a directory')
-    global_args.add_argument('-o', "--output", default='./examples/pred_target', help='output f0 analysis (either a directory or a file with sdif extension)')
+    global_args.add_argument('-o', "--output", default='./examples/pred_target_triangle', help='output f0 analysis (either a directory or a file with sdif extension)')
     global_args.add_argument('-m', "--modelTag", default='FCN_synth_tri', help='name model to be used for prediction (default is FCN_synth_tri)')
 
     args = parser.parse_args()
