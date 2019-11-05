@@ -9,15 +9,15 @@ Code for running Glottal Closure Instants (GCI) detection using the fully-convol
 We kindly request academic publications making use of our FCN models to cite the aforementioned paper.
 
 ## Description
-The code provided in this repository aims at performing GCI dectection using a Fully-Convolutional Neural Network.
+The code provided in this repository aims at performing GCI dectection using a Fully-Convolutional Neural Network. Note that it also allows to perform the prediction of the glottal flow shape (normalized in amplitude) from which more information than the GCIs may be extracted.
 
 The provided code allows to run the GCI detection on given speech sound files using the provided pretrained models, but no code is currently provided to train the model on new data.
 All pre-trained models evaluated in the above-mentionned paper are provided.
-The default model "XXX" has been trained on a large database of high-quality synthetic speech (obtained by resynthesizing ...)
+The models "FCN_synth_GF" and "FCN_synth_tri have been trained on a large database of high-quality synthetic speech (obtained by resynthesizing the BREF and TIMIT database using the PaN vocoder [4]). The difference between the 2 is that "FCN_synth_tri" predicts a triangular curve from which the GCIs are extracted by simple peak-picking on the maximums, while "FCN_synth_GF" predicts the glottal flow shape and performs the peak-picking on its negative derivative. The "FCN_CMU__10_90" and "FCN_CMU__60_20_20" models have been trained on the CMU database (with different train/validation/test splits) using a triangle shape as target.
 
 The models, algorithm, training, and evaluation procedures have been described in a publication entitled "GCI detection from raw speech using a fully-convolutional network" (https://arxiv.org/abs/1910.10235).
 
-Below are the results of our evaluations comparing our models to the SEDREAMS and DPI algorithms, in terms of XXX (XXX, on both a test database of synthetic speech "XXX" and two datasets of real speech samples with XXX "XXX"). All model and algorithms have been evaluated on 16kHz audio (???).
+Below are the results of our evaluations comparing our models to the SEDREAMS and DPI algorithms, in terms of IDR, MR, FAR, and IDA. The evaluation has been conducted on both a test database of synthetic speech and two datasets of real speech samples from the CMU [XX] and PTDB-TUG [XX] databases). All model and algorithms have been evaluated on 16kHz audio.
 <table>
     <thead>
         <tr>
