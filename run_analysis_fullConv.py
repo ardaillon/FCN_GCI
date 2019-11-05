@@ -1,4 +1,3 @@
-from dnn_mods.gputils import lock_gpu
 import os
 import sys
 import numpy as np
@@ -11,9 +10,20 @@ import re
 model_sr = 16000.
 
 def db2lin(vec) :
+    '''
+    Convert values from dB to linear
+    :param vec: input values on a linear scale
+    :return: output values on a dB scale
+    '''
     return 10**(vec/20.)
 
 def normalize_snd_file(inSnd, level = -3):
+    '''
+    Normalize input sound to have its maximum absolute value at the given level in dB
+    :param inSnd: input sound
+    :param level: maximum absolute value in dB
+    :return: normalized sound
+    '''
     maxValIn = np.max(np.abs(inSnd))
     maxValOut = db2lin(level)
     scaleFactor = maxValOut / maxValIn
@@ -22,12 +32,12 @@ def normalize_snd_file(inSnd, level = -3):
 
 def segment_sound(snd, segDuration = 60., frame_sizes = 993, totalNetworkPoolingFactor = 8):
     '''
-    Segment input sound file into smaller chunks to avoid memory issues
+    Segment input sound file into smaller chunks to avoid memory issues during inference
     :param snd: input sound
     :param segDuration: maximum duration of segments (in s)
-    :param frame_sizes:
-    :param totalNetworkPoolingFactor:
-    :return:
+    :param frame_sizes: minimal size used by the network for prediction (necessary to have a correct connection of predicted values when reassembling the predicted vectors in the end)
+    :param totalNetworkPoolingFactor: total pooling factor (downsampling) applied by the max pooling layers in the network (necessary to have a correct connection of predicted values when reassembling the predicted vectors in the end)
+    :return: sound segments
     '''
     maxSndSegLenSamp = int(segDuration * model_sr)
     maxSndSegLenSamp -= maxSndSegLenSamp%totalNetworkPoolingFactor
@@ -43,20 +53,19 @@ def segment_sound(snd, segDuration = 60., frame_sizes = 993, totalNetworkPooling
 
     return sndSegments
 
-def run_prediction(filename, output = None, modelTag = 'FCN_synth_tri', verbose = True, plot = False):
-    """
+def run_prediction(filename, output = None, modelTag = 'FCN_synth_tri', verbose = True):
+    '''
     Collect the sound files to process and run the prediction on each file
-    Parameters
-    ----------
-    filename : list
-        List containing paths to sound files (wav or aiff) or folders containing sound files to
-        be analyzed.
-    output : str or None
-        Path to directory for saving output files. If None, output files will
-        be saved to the directory containing the input file.
-    verbose : bool
+    :param filename: List
+        List containing paths to sound files (wav or aiff) or folders containing sound files to be analyzed.
+    :param output: str or None
+        Path to directory for saving output files. If None, output files will be saved to the directory containing the input file.
+    :param modelTag: str
+        name of the pre-trained model to be used for inference
+    :param verbose: bool
         Print status messages and keras progress (default=True).
-    """
+    :return: nothing
+    '''
 
     # load model:
     load_from_json = False
@@ -93,11 +102,17 @@ def run_prediction(filename, output = None, modelTag = 'FCN_synth_tri', verbose 
         if verbose:
             print('FCN_GCI: Processing {} ... ({}/{})'.format(
                 file, i+1, len(files)), file=sys.stderr)
-        run_prediction_on_file(file, output=output, model=model, plot=plot, verbose=verbose)
+        run_prediction_on_file(file, output=output, model=model, verbose=verbose)
     return
 
 
 def get_audio(sndFile, model_input_size = 993):
+    '''
+    Load and pre-process (make mono, resample, normalize, and pad) audio from input sound file
+    :param sndFile: input sound file
+    :param model_input_size: minimum input size of the model (necessary for padding input sound to have correct duration in output)
+    :return: audio, sound encoding tag
+    '''
 
     # read sound :
     # from scipy.io import wavfile
@@ -125,9 +140,13 @@ def get_audio(sndFile, model_input_size = 993):
 
 
 def get_output_path(file, suffix, output_dir):
-    """
-    return the output path of an output file corresponding to a wav file
-    """
+    '''
+    Return the path of an output file corresponding to a wav file
+    :param file: input file
+    :param suffix: suffixe to be used for the output file
+    :param output_dir: output directory where to store output file
+    :return: full path of output file
+    '''
 
     if((output_dir is not None) and ((suffix.endswith('.sdif') and output_dir.endswith('sdif')) or (suffix.endswith('.csv') and output_dir.endswith('csv')))):
         path = output_dir
@@ -141,16 +160,15 @@ def get_output_path(file, suffix, output_dir):
     return path
 
 
-def run_prediction_on_file(inFile, output=None, model=None, maxSndSegLenSec = 60, model_input_size = 993, totalNetworkPoolingFactor = 8, plot=False, verbose=True):
+def run_prediction_on_file(inFile, output=None, model=None, maxSndSegLenSec = 60, model_input_size = 993, totalNetworkPoolingFactor = 8, verbose=True):
     '''
-
-    :param file:
-    :param output:
-    :param model:
+    Run the prediction of target waveform on input file
+    :param file: full path to the file to be analyzed
+    :param output: output directory
+    :param model: prebuilt model with preloaded weights to be used for inference
     :param maxSndSegLenSec: default is 60s. Analyse segments of a maximum duration of maxSndSegLenSec seconds to avoid running out of memory
-    :param plot:
-    :param verbose:
-    :return:
+    :param verbose: print some infos
+    :return: don't return anything
     '''
 
     if(model==None):
@@ -166,7 +184,7 @@ def run_prediction_on_file(inFile, output=None, model=None, maxSndSegLenSec = 60
     for iseg, sndSeg in enumerate(sndSegments):
 
         audio = np.array([np.reshape(sndSeg, (len(sndSeg),1,1))])
-        activationsSeg = model.predict(audio, verbose=1)
+        activationsSeg = model.predict(audio, verbose=verbose)
         activationsSeg = np.reshape(activationsSeg, (np.shape(activationsSeg)[1]))
         activations = np.concatenate((activations, activationsSeg))
 
@@ -221,14 +239,14 @@ if __name__ == '__main__':
     ####################################################################################################################
 
     try:
-        if(not args.cpu):
-            gpu_id_locked = lock_gpu()
+        from dnn_mods.gputils import lock_gpu
+        gpu_id_locked = lock_gpu()
     except:
-        print("unable to lock a gpu")
+        print(" ")
 
     ####################################################################################################################
     ########################################### run network on audio files : ###########################################
     ####################################################################################################################
 
-    run_prediction(input, output=output, modelTag=modelTag, verbose=True, plot=False)
+    run_prediction(input, output=output, modelTag=modelTag, verbose=True)
 
