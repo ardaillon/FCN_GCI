@@ -38,21 +38,26 @@ Our synthetic speech database has been created by resynthesizing the BREF [2] an
 #### Default analysis : This will run the FCN-993 model and output the result as a csv file in the same folder than the input file (replacing the file extension by ".csv")
 python /path_to/FCN-f0/FCN_GCI.py /path_to/test.wav
 
-#### Run the analysis on a whole folder of audio files :
+#### Run the analysis on a whole folder of audio files
 python /path_to/FCN-f0/FCN_GCI.py /path_to/audio_files
 
-#### Choose a specific model for running the analysis (default is FCN-993):
+#### Choose a specific model for running the analysis (default is FCN-993)
 Use FCN-synth-tri model :
 python /path_to/FCN-f0/FCN_GCI.py /path_to/test.wav -m FCN-synth-tri -o /path_to/output.FCN-synth-tri.GCI.sdif
 
 XXX ...
 
-#### Specify an output directory or file name with "-o" option(if directory doesn't exist, it will be created):
+#### Specify an output directory or file name with "-o" option(if directory doesn't exist, it will be created)
 python /path_to/FCN-f0/FCN_GCI.py /path_to/test.wav -o /path_to/output.GCI.lab
 python /path_to/FCN-f0/FCN_GCI.py /path_to/audio_files -o /path_to/output_dir
 
-#### Output result to sdif format (requires installing the eaSDIF python library. Default format is lab):
+#### Output result to sdif format (requires installing the eaSDIF python library. Default format is lab)
 python /path_to/FCN-f0/FCN_GCI.py /path_to/test.wav -f sdif
+
+## Example figures
+![Example of prediction of triangle shape from real speech extract](examples/figures/prediction_triangle_example.png?raw=true "Example of prediction of triangle shape from real speech extract")
+
+![Example of prediction of glottal flow shape from real speech extract](examples/figures/prediction_glottal_flow_example.png?raw=true "Example of prediction of glottal flow shape from real speech extract")
 
 ## References
 [1] XXX
