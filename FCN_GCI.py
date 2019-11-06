@@ -14,14 +14,14 @@ modified by Luc Ardaillon: 05/11/2019
 
 import os
 import sys
-import numpy as np
-from pysndfile import sndio
-import warnings
+# from pysndfile import sndio
+from scipy.io import wavfile
 from models.core import load_model
 import re
 from target_to_GCI import get_gci_times
 from fileio.sdif import mrk
 from predict_target import speech_to_target
+import numpy as np
 
 
 # model is trained for a sampling rate of 16000Hz
@@ -128,7 +128,8 @@ def run_prediction_on_file(inFile, output=None, model=None, mode = 'GF', maxSndS
     if(not os.path.isdir(outputDir)):
         os.makedirs(outputDir)
     print("saving target shape analysis to file "+targetFile)
-    sndio.write(targetFile, targetPred, model_sr, 'wav', 'pcm16')
+    # sndio.write(targetFile, targetPred, model_sr, 'wav', 'pcm16')
+    wavfile.write(targetFile, int(model_sr), targetPred)
 
     GCI_times = get_gci_times(targetPred, model_sr, mode=mode)
 

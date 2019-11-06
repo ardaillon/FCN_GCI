@@ -1,5 +1,6 @@
 
-from pysndfile import sndio
+# from pysndfile import sndio
+from scipy.io import wavfile
 import os
 
 def low_pass_butter(sig, order = 5, cutOff = 500, fs = 44100):
@@ -45,7 +46,8 @@ if __name__ == '__main__':
             outEggFile = os.path.join(outCleanEggDir, f)
 
             # load egg signal
-            (egg, sr, enc) = sndio.read(inEggFile)
+            # (egg, sr, enc) = sndio.read(inEggFile)
+            (sr, egg) = wavfile.read(inEggFile)
 
             # low-pass signal to remove noise
             egg_lp = low_pass_butter(egg, order = 5, cutOff = 500, fs = sr)
@@ -53,5 +55,6 @@ if __name__ == '__main__':
             # high-pass filter signal to remove slow fluctuations
             egg_filt = high_pass_butter(egg_lp, order = 5, cutOff = 30, fs = sr)
 
-            sndio.write(outEggFile, egg_filt, sr, 'wav', enc)
+            # sndio.write(outEggFile, egg_filt, sr, 'wav', enc)
+            wavfile.write(outEggFile, int(sr), egg_filt)
 
