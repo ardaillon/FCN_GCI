@@ -18,7 +18,8 @@ The models "FCN_synth_GF" and "FCN_synth_tri have been trained on a large databa
 The models, algorithm, training, and evaluation procedures have been described in a publication entitled "GCI detection from raw speech using a fully-convolutional network" (https://arxiv.org/abs/1910.10235).
 
 Below are the results of our evaluations comparing our models to the SEDREAMS and DPI algorithms, in terms of IDR, MR, FAR, and IDA. The evaluation has been conducted on both a test database of synthetic speech and two datasets of real speech samples from the CMU [XX] and PTDB-TUG [XX] databases). All model and algorithms have been evaluated on 16kHz audio.
-<!--<table>
+<!--
+<table>
     <thead>
         <tr>
             <th> </th>
@@ -37,22 +38,20 @@ Below are the results of our evaluations comparing our models to the SEDREAMS an
 </table>
 -->
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg .tg-baqh{text-align:center;vertical-align:top}
-.tg .tg-0lax{text-align:left;vertical-align:top}
-</style>
-<table class="tg">
+<!--
+<table>
+  <thead>
+    <tr>
+        <th class="tg-baqh" rowspan="2"></th>
+        <th class="tg-baqh" colspan="3">IDR</th>
+        <th class="tg-baqh" colspan="3">MR</th>
+        <th class="tg-baqh" colspan="3">FAR</th>
+        <th class="tg-baqh" colspan="3">IDA</th>
+    </tr>
+  </thead>
+  <tbody>
   <tr>
-    <th class="tg-baqh" rowspan="2"></th>
-    <th class="tg-baqh" colspan="3">IDR</th>
-    <th class="tg-baqh" colspan="3">MR</th>
-    <th class="tg-baqh" colspan="3">FAR</th>
-    <th class="tg-baqh" colspan="3">IDA</th>
-  </tr>
-  <tr>
+    <td class="tg-baqh"></td>
     <td class="tg-baqh">synth</td>
     <td class="tg-baqh">CMU</td>
     <td class="tg-baqh">PTDB</td>
@@ -171,7 +170,140 @@ Below are the results of our evaluations comparing our models to the SEDREAMS an
     <td class="tg-baqh">0.2</td>
     <td class="tg-baqh"></td>
   </tr>
+  </tbody>
 </table>
+-->
+
+<div class="tg-wrap">
+ <table>
+  <tr>
+    <th rowspan="2"></th>
+    <th colspan="3">IDR</th>
+    <th colspan="3">MR</th>
+    <th colspan="3">FAR</th>
+    <th colspan="3">IDA</th>
+  </tr>
+  <tr>
+    <td>synth</td>
+    <td>CMU</td>
+    <td>PTDB</td>
+    <td>synth</td>
+    <td>CMU</td>
+    <td>PTDB</td>
+    <td>synth</td>
+    <td>CMU</td>
+    <td>PTDB</td>
+    <td>synth</td>
+    <td>CMU</td>
+    <td>PTDB</td>
+  </tr>
+  <tr>
+    <td>FCN-synth-tri</td>
+    <td>99.90</td>
+    <td>97.95</td>
+    <td>95.37</td>
+    <td>0.08</td>
+    <td>1.89</td>
+    <td>3.40</td>
+    <td><span style="font-weight:bold">0.02</span></td>
+    <td>0.17</td>
+    <td>1.22</td>
+    <td><span style="font-weight:bold">0.08</span></td>
+    <td>0.26</td>
+    <td>0.32</td>
+  </tr>
+  <tr>
+    <td>FCN-synth-GF</td>
+    <td><span style="font-weight:bold">99.91</span></td>
+    <td>98.43</td>
+    <td><span style="font-weight:bold">95.64</span></td>
+    <td><span style="font-weight:bold">0.06</span></td>
+    <td>1.20</td>
+    <td>2.91</td>
+    <td>0.04</td>
+    <td>0.37</td>
+    <td>1.45</td>
+    <td>0.11</td>
+    <td>0.34</td>
+    <td>0.38</td>
+  </tr>
+  <tr>
+    <td>FCN-CMU-10/90</td>
+    <td>49.63</td>
+    <td>99.39</td>
+    <td>90.13</td>
+    <td>48.05</td>
+    <td>0.50</td>
+    <td>8.91</td>
+    <td>0.51</td>
+    <td>0.11</td>
+    <td>0.95</td>
+    <td>0.52</td>
+    <td>0.10</td>
+    <td><span style="font-weight:bold">0.26</span></td>
+  </tr>
+  <tr>
+    <td>FCN-CMU-60/20/20</td>
+    <td>60.06</td>
+    <td><span style="font-weight:bold">99.52</span></td>
+    <td>88.17</td>
+    <td>39.14</td>
+    <td>0.40</td>
+    <td>11.00</td>
+    <td>0.64</td>
+    <td><span style="font-weight:bold">0.08</span></td>
+    <td><span style="font-weight:bold">0.81</span></td>
+    <td>0.50</td>
+    <td><span style="font-weight:bold">0.09</span></td>
+    <td><span style="font-weight:bold">0.26</span></td>
+  </tr>
+  <tr>
+    <td>SEDREAMS</td>
+    <td>89.26</td>
+    <td>99.04</td>
+    <td>95.34</td>
+    <td>3.86</td>
+    <td><span style="font-weight:bold">0.21</span></td>
+    <td><span style="font-weight:bold">2.15</span></td>
+    <td>6.88</td>
+    <td>0.75</td>
+    <td>2.51</td>
+    <td>0.68</td>
+    <td>0.36</td>
+    <td>0.62</td>
+  </tr>
+  <tr>
+    <td>DPI</td>
+    <td>88.22</td>
+    <td>98.69</td>
+    <td>91.3</td>
+    <td>2.14</td>
+    <td>0.23</td>
+    <td>2.16</td>
+    <td>9.64</td>
+    <td>1.08</td>
+    <td>6.53</td>
+    <td>0.83</td>
+    <td>0.23</td>
+    <td>0.49</td>
+  </tr>
+  <tr>
+    <td>DCNN (from [21])</td>
+    <td></td>
+    <td>99.3</td>
+    <td></td>
+    <td></td>
+    <td>0.3</td>
+    <td></td>
+    <td></td>
+    <td>0.4</td>
+    <td></td>
+    <td></td>
+    <td>0.2</td>
+    <td></td>
+  </tr>
+ </table>
+</div>
 
 Our synthetic speech database has been created by resynthesizing the BREF [2] and TIMIT [3] databases using the PAN synthesis engine, described in [4, Section 3.5.2].
 
