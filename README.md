@@ -152,8 +152,9 @@ Below are the results of our evaluations comparing our models to the SEDREAMS [5
 
 ## Example command-line usage (using provided pretrained models)
 
-#### Default analysis : This will run the glottal flow prediction and GCI detection using the FCN-synth-GF on the input file or full directory and store the output files (predicted glottal flow as 16kHz wav file, and GCI markers as sdif file) in the same folder than the input file :
-python /path_to/FCN-f0/FCN_GCI.py -i /path_to/test_directory_or_file
+#### Default analysis :
+This will run the glottal flow prediction and GCI detection using the FCN-synth-GF on the input file or full directory and store the output files (predicted glottal flow as 16kHz wav file, and GCI markers as sdif file) in the same folder than the input file :
+> python /path_to/FCN-f0/FCN_GCI.py -i /path_to/test_directory_or_file
 
 <!--
 #### Run the analysis on a whole folder of audio files
