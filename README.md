@@ -50,19 +50,19 @@ Below are the results of our evaluations comparing our models to the SEDREAMS [5
     <td><sub>0.08</sub></td>
     <td><sub>1.89</sub></td>
     <td><sub>3.40</sub></td>
-    <td><span style="font-weight:bold"><sub>0.02</sub></span></td>
+    <td><strong><sub>0.02</sub></strong></td>
     <td><sub>0.17</sub></td>
     <td><sub>1.22</sub></td>
-    <td><span style="font-weight:bold"><sub>0.08</sub></span></td>
+    <td><strong><sub>0.08</sub></strong></td>
     <td><sub>0.26</sub></td>
     <td><sub>0.32</sub></td>
   </tr>
   <tr>
     <td><sub>FCN-synth-GF</td>
-    <td><span style="font-weight:bold"><sub>99.91</sub></span></td>
+    <td><strong><sub>99.91</sub></strong></td>
     <td><sub>98.43</sub></td>
-    <td><span style="font-weight:bold"><sub>95.64</sub></span></td>
-    <td><span style="font-weight:bold"><sub>0.06</sub></span></td>
+    <td><strong><sub>95.64</sub></strong></td>
+    <td><strong><sub>0.06</sub></strong></td>
     <td><sub>1.20</sub></td>
     <td><sub>2.91</sub></td>
     <td><sub>0.04</sub></td>
@@ -85,22 +85,22 @@ Below are the results of our evaluations comparing our models to the SEDREAMS [5
     <td><sub>0.95</sub></td>
     <td><sub>0.52</sub></td>
     <td><sub>0.10</sub></td>
-    <td><span style="font-weight:bold"><sub>0.26</sub></span></td>
+    <td><strong><sub>0.26</sub></strong></td>
   </tr>
   <tr>
     <td><sub>FCN-CMU-60/20/20</sub></td>
     <td><sub>60.06</sub></td>
-    <td><span style="font-weight:bold"><sub>99.52</sub></span></td>
+    <td><strong><sub>99.52</sub></strong></td>
     <td><sub>88.17</sub></td>
     <td><sub>39.14</sub></td>
     <td><sub>0.40</sub></td>
     <td><sub>11.00</sub></td>
     <td><sub>0.64</sub></td>
-    <td><span style="font-weight:bold"><sub>0.08</sub></span></td>
-    <td><span style="font-weight:bold"><sub>0.81</sub></span></td>
+    <td><strong><sub>0.08</sub></strong></td>
+    <td><strong><sub>0.81</sub></strong></td>
     <td><sub>0.50</sub></td>
-    <td><span style="font-weight:bold"><sub>0.09</sub></span></td>
-    <td><span style="font-weight:bold"><sub>0.26</sub></span></td>
+    <td><strong><sub>0.09</sub></strong></td>
+    <td><strong><sub>0.26</sub></strong></td>
   </tr>
   <tr>
     <td><sub>SEDREAMS</sub></td>
@@ -108,8 +108,8 @@ Below are the results of our evaluations comparing our models to the SEDREAMS [5
     <td><sub>99.04</sub></td>
     <td><sub>95.34</sub></td>
     <td><sub>3.86</sub></td>
-    <td><span style="font-weight:bold"><sub>0.21</sub></span></td>
-    <td><span style="font-weight:bold"><sub>2.15</sub></span></td>
+    <td><strong><sub>0.21</sub></strong></td>
+    <td><strong><sub>2.15</sub></strong></td>
     <td><sub>6.88</sub></td>
     <td><sub>0.75</sub></td>
     <td><sub>2.51</sub></td>
