@@ -14,8 +14,10 @@ modified by Luc Ardaillon: 05/11/2019
 
 import os
 import sys
-# from pysndfile import sndio
-from scipy.io import wavfile
+try:
+    from pysndfile import sndio
+except:
+    from scipy.io import wavfile
 from models.core import load_model
 import re
 from target_to_GCI import get_gci_times
@@ -128,8 +130,10 @@ def run_prediction_on_file(inFile, output=None, model=None, mode = 'GF', maxSndS
     if(not os.path.isdir(outputDir)):
         os.makedirs(outputDir)
     print("saving target shape analysis to file "+targetFile)
-    # sndio.write(targetFile, targetPred, model_sr, 'wav', 'pcm16')
-    wavfile.write(targetFile, int(model_sr), targetPred)
+    try:
+        sndio.write(targetFile, targetPred, model_sr, 'wav', 'pcm16')
+    except:
+        wavfile.write(targetFile, int(model_sr), targetPred)
 
     GCI_times = get_gci_times(targetPred, model_sr, mode=mode)
 

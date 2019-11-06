@@ -1,8 +1,10 @@
 
 import numpy as np
 import warnings
-# from pysndfile import sndio
-from scipy.io import wavfile
+try:
+    from pysndfile import sndio
+except:
+    from scipy.io import wavfile
 
 
 def db2lin(vec) :
@@ -37,8 +39,10 @@ def get_audio(sndFile, model_input_size = 993, model_sr=16000.):
     '''
 
     # read sound :
-    (sr, audio) = wavfile.read(sndFile)
-    # (audio, sr, enc) = sndio.read(sndFile)
+    try:
+        (audio, sr, enc) = sndio.read(sndFile)
+    except:
+        (sr, audio) = wavfile.read(sndFile)
 
     if len(audio.shape) == 2:
         audio = audio.mean(1)  # make mono

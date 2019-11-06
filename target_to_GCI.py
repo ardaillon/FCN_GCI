@@ -1,5 +1,7 @@
-# from pysndfile import sndio
-from scipy.io import wavfile
+try:
+    from pysndfile import sndio
+except:
+    from scipy.io import wavfile
 from scipy.signal import find_peaks
 from fileio.sdif import mrk
 import numpy as np
@@ -125,8 +127,10 @@ if __name__ == '__main__':
     if(inputFile.endswith('.wav')):
         print("processing file "+inputFile)
 
-        # (targetPred, sr, enc) = sndio.read(inputFile)
-        (sr, targetPred) = wavfile.read(inputFile)
+        try:
+            (targetPred, sr, enc) = sndio.read(inputFile)
+        except:
+            (sr, targetPred) = wavfile.read(inputFile)
 
         GCI_times = get_gci_times(targetPred, sr, mode=mode, thresh=thresh)
 
