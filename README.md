@@ -153,33 +153,18 @@ Below are the results of our evaluations comparing our models to the SEDREAMS [5
 ## Example command-line usage (using provided pretrained models)
 
 #### Default analysis :
-This will run the glottal flow prediction and GCI detection using the FCN-synth-GF on the input file or full directory and store the output files (predicted glottal flow as 16kHz wav file, and GCI markers as sdif file) in the same folder than the input file :
-> python /path_to/FCN-f0/FCN_GCI.py -i /path_to/test_directory_or_file
+This will run the glottal flow prediction and GCI detection using the FCN-synth-GF on the input file and store the output files (predicted glottal flow as 16kHz wav file, and GCI markers as sdif file) in the same folder than the input file :
+> python /path_to/FCN-f0/FCN_GCI.py -i /path_to/test_file.wav
+(note that you may specify a directory au audio files as input instead of a single file)
 
-<!--
-#### Run the analysis on a whole folder of audio files
-python /path_to/FCN-f0/FCN_GCI.py /path_to/audio_files
--->
+#### Run the analysis on a whole folder of audio files and specify output directory :
+> python /path_to/FCN-f0/FCN_GCI.py -i /path_to/audio_files -o /path_to/output_directory
+(If the output directory doesn't exist, it will be created)
 
-<!--
-#### Choose a specific model for running the analysis (default is FCN-993)
+#### Run the analysis using a specific model (default is FCN_synth_GF)
 Use FCN-synth-tri model :
-python /path_to/FCN-f0/FCN_GCI.py /path_to/test.wav -m FCN-synth-tri -o /path_to/output.FCN-synth-tri.GCI.sdif
--->
-
-<!--
-XXX ...
--->
-
-<!-- 
-#### Specify an output directory or file name with "-o" option(if directory doesn't exist, it will be created)
-python /path_to/FCN-f0/FCN_GCI.py /path_to/test.wav -o /path_to/output.GCI.lab
-python /path_to/FCN-f0/FCN_GCI.py /path_to/audio_files -o /path_to/output_dir
--->
-<!-- 
-#### Output result to sdif format (requires installing the eaSDIF python library. Default format is lab)
-python /path_to/FCN-f0/FCN_GCI.py /path_to/test.wav -f sdif
--->
+> python /path_to/FCN-f0/FCN_GCI.py -i path_to/audio_files -m FCN_synth_tri -o /path_to/output.FCN-synth-tri.GCI.sdif
+(possible tags for pre-trained models are "FCN_synth_GF", "FCN_synth_tri", "FCN_CMU__10_90", and "FCN_CMU__60_20_20")
 
 ## Example figures
 Example of prediction of triangle shape from real speech extract :
