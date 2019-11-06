@@ -173,6 +173,13 @@ Example of prediction of triangle shape from real speech extract :
 Example of prediction of glottal flow shape from real speech extract :
 ![Example of prediction of glottal flow shape from real speech extract](examples/figures/pred_GF.png?raw=true "Example of prediction of glottal flow shape from real speech extract")
 
+## Dependencies
+keras
+tensorflow
+scipy
+numpy
+(optional : pysndfile)
+
 ## References
 [1] J. L. Gauvain, L. F. Lamel, and M. Eskenazi, "Design Considerations and Text Selection for BREF, a large French Read-Speech Corpus", 1st International Conference on Spoken Language Processing, ICSLP, http://www.limsi.fr/~lamel/kobe90.pdf
 
