@@ -3,7 +3,10 @@ try:
 except:
     from scipy.io import wavfile
 from scipy.signal import find_peaks
-from fileio.sdif import mrk
+try:
+    from fileio.sdif import mrk # ircam's library for our own use, not available from github
+except:
+    from file_utils.fileio import write_csv_file
 import numpy as np
 from matplotlib import pyplot as plt
 
@@ -134,5 +137,8 @@ if __name__ == '__main__':
 
         GCI_times = get_gci_times(targetPred, sr, mode=mode, thresh=thresh)
 
-        mrk.store(outputFile, GCI_times, ['GCI'] * len(GCI_times))
+        try:
+            mrk.store(outputFile, GCI_times, ['GCI'] * len(GCI_times))
+        except:
+            write_csv_file(outputFile, GCI_times, ['GCI'] * len(GCI_times))
 

@@ -13,6 +13,7 @@ modified by Luc Ardaillon: 05/11/2019
 """
 
 import os
+import os
 import sys
 try:
     from pysndfile import sndio
@@ -21,7 +22,10 @@ except:
 from models.core import load_model
 import re
 from target_to_GCI import get_gci_times
-from fileio.sdif import mrk
+try:
+    from fileio.sdif import mrk # ircam's library for our own use, not available from github
+except:
+    from file_utils.fileio import write_csv_file
 from predict_target import speech_to_target
 import numpy as np
 
@@ -137,9 +141,14 @@ def run_prediction_on_file(inFile, output=None, model=None, mode = 'GF', maxSndS
 
     GCI_times = get_gci_times(targetPred, model_sr, mode=mode)
 
-    GCIFile = targetFile.replace('.targetPred.wav', '.GCI.sdif')
-    print("saving GCI markers in file "+GCIFile)
-    mrk.store(GCIFile, GCI_times, ['GCI'] * len(GCI_times))
+    try:
+        GCIFile = targetFile.replace('.targetPred.wav', '.GCI.sdif')
+        mrk.store(GCIFile, GCI_times, ['GCI'] * len(GCI_times))
+        print("saved GCI markers in file "+GCIFile)
+    except:
+        GCIFile = targetFile.replace('.targetPred.wav', '.GCI.csv')
+        write_csv_file(GCIFile, GCI_times, ['GCI'] * len(GCI_times))
+        print("saved GCI markers in file "+GCIFile)
 
     return
 
