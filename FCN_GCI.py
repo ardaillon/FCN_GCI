@@ -13,7 +13,6 @@ modified by Luc Ardaillon: 05/11/2019
 """
 
 import os
-import os
 import sys
 try:
     from pysndfile import sndio
