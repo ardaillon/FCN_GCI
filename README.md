@@ -18,11 +18,14 @@ The models "FCN_synth_GF" and "FCN_synth_tri have been trained on a large databa
 The models, algorithm, training, and evaluation procedures have been described in a publication entitled "GCI detection from raw speech using a fully-convolutional network" (https://arxiv.org/abs/1910.10235).
 
 Below are the results of our evaluations comparing our models to the SEDREAMS and DPI algorithms, in terms of IDR, MR, FAR, and IDA. The evaluation has been conducted on both a test database of synthetic speech and two datasets of real speech samples from the CMU [XX] and PTDB-TUG [XX] databases). All model and algorithms have been evaluated on 16kHz audio.
-<table>
+<!--<table>
     <thead>
         <tr>
             <th> </th>
-            <th><sub>XXX</sub></th>
+            <th><sub>IDR</sub></th>
+            <th><sub>MR</sub></th>
+            <th><sub>FAR</sub></th>
+            <th><sub>IDA</sub></th>
         </tr>
     </thead>
     <tbody>
@@ -31,6 +34,143 @@ Below are the results of our evaluations comparing our models to the SEDREAMS an
             <td><sub><strong>XXX</strong></sub></td>
         </tr>        
     </tbody>
+</table>
+-->
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-baqh{text-align:center;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-baqh" rowspan="2"></th>
+    <th class="tg-baqh" colspan="3">IDR</th>
+    <th class="tg-baqh" colspan="3">MR</th>
+    <th class="tg-baqh" colspan="3">FAR</th>
+    <th class="tg-baqh" colspan="3">IDA</th>
+  </tr>
+  <tr>
+    <td class="tg-baqh">synth</td>
+    <td class="tg-baqh">CMU</td>
+    <td class="tg-baqh">PTDB</td>
+    <td class="tg-baqh">synth</td>
+    <td class="tg-baqh">CMU</td>
+    <td class="tg-baqh">PTDB</td>
+    <td class="tg-baqh">synth</td>
+    <td class="tg-baqh">CMU</td>
+    <td class="tg-baqh">PTDB</td>
+    <td class="tg-baqh">synth</td>
+    <td class="tg-baqh">CMU</td>
+    <td class="tg-baqh">PTDB</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">FCN-synth-tri</td>
+    <td class="tg-baqh">99.90</td>
+    <td class="tg-baqh">97.95</td>
+    <td class="tg-baqh">95.37</td>
+    <td class="tg-baqh">0.08</td>
+    <td class="tg-baqh">1.89</td>
+    <td class="tg-baqh">3.40</td>
+    <td class="tg-baqh"><span style="font-weight:bold">0.02</span></td>
+    <td class="tg-baqh">0.17</td>
+    <td class="tg-baqh">1.22</td>
+    <td class="tg-baqh"><span style="font-weight:bold">0.08</span></td>
+    <td class="tg-baqh">0.26</td>
+    <td class="tg-baqh">0.32</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">FCN-synth-GF</td>
+    <td class="tg-baqh"><span style="font-weight:bold">99.91</span></td>
+    <td class="tg-baqh">98.43</td>
+    <td class="tg-baqh"><span style="font-weight:bold">95.64</span></td>
+    <td class="tg-baqh"><span style="font-weight:bold">0.06</span></td>
+    <td class="tg-baqh">1.20</td>
+    <td class="tg-baqh">2.91</td>
+    <td class="tg-baqh">0.04</td>
+    <td class="tg-baqh">0.37</td>
+    <td class="tg-baqh">1.45</td>
+    <td class="tg-baqh">0.11</td>
+    <td class="tg-baqh">0.34</td>
+    <td class="tg-baqh">0.38</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">FCN-CMU-10/90</td>
+    <td class="tg-baqh">49.63</td>
+    <td class="tg-baqh">99.39</td>
+    <td class="tg-baqh">90.13</td>
+    <td class="tg-baqh">48.05</td>
+    <td class="tg-baqh">0.50</td>
+    <td class="tg-baqh">8.91</td>
+    <td class="tg-baqh">0.51</td>
+    <td class="tg-baqh">0.11</td>
+    <td class="tg-baqh">0.95</td>
+    <td class="tg-baqh">0.52</td>
+    <td class="tg-baqh">0.10</td>
+    <td class="tg-baqh"><span style="font-weight:bold">0.26</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">FCN-CMU-60/20/20</td>
+    <td class="tg-baqh">60.06</td>
+    <td class="tg-baqh"><span style="font-weight:bold">99.52</span></td>
+    <td class="tg-baqh">88.17</td>
+    <td class="tg-baqh">39.14</td>
+    <td class="tg-baqh">0.40</td>
+    <td class="tg-baqh">11.00</td>
+    <td class="tg-baqh">0.64</td>
+    <td class="tg-baqh"><span style="font-weight:bold">0.08</span></td>
+    <td class="tg-baqh"><span style="font-weight:bold">0.81</span></td>
+    <td class="tg-baqh">0.50</td>
+    <td class="tg-baqh"><span style="font-weight:bold">0.09</span></td>
+    <td class="tg-baqh"><span style="font-weight:bold">0.26</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">SEDREAMS</td>
+    <td class="tg-baqh">89.26</td>
+    <td class="tg-baqh">99.04</td>
+    <td class="tg-baqh">95.34</td>
+    <td class="tg-baqh">3.86</td>
+    <td class="tg-baqh"><span style="font-weight:bold">0.21</span></td>
+    <td class="tg-baqh"><span style="font-weight:bold">2.15</span></td>
+    <td class="tg-baqh">6.88</td>
+    <td class="tg-baqh">0.75</td>
+    <td class="tg-baqh">2.51</td>
+    <td class="tg-baqh">0.68</td>
+    <td class="tg-baqh">0.36</td>
+    <td class="tg-baqh">0.62</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">DPI</td>
+    <td class="tg-baqh">88.22</td>
+    <td class="tg-baqh">98.69</td>
+    <td class="tg-baqh">91.3</td>
+    <td class="tg-baqh">2.14</td>
+    <td class="tg-baqh">0.23</td>
+    <td class="tg-baqh">2.16</td>
+    <td class="tg-baqh">9.64</td>
+    <td class="tg-baqh">1.08</td>
+    <td class="tg-baqh">6.53</td>
+    <td class="tg-baqh">0.83</td>
+    <td class="tg-baqh">0.23</td>
+    <td class="tg-baqh">0.49</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">DCNN (from [21])</td>
+    <td class="tg-baqh"></td>
+    <td class="tg-baqh">99.3</td>
+    <td class="tg-baqh"></td>
+    <td class="tg-baqh"></td>
+    <td class="tg-baqh">0.3</td>
+    <td class="tg-baqh"></td>
+    <td class="tg-baqh"></td>
+    <td class="tg-baqh">0.4</td>
+    <td class="tg-baqh"></td>
+    <td class="tg-baqh"></td>
+    <td class="tg-baqh">0.2</td>
+    <td class="tg-baqh"></td>
+  </tr>
 </table>
 
 Our synthetic speech database has been created by resynthesizing the BREF [2] and TIMIT [3] databases using the PAN synthesis engine, described in [4, Section 3.5.2].
