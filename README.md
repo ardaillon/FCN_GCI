@@ -9,15 +9,15 @@ Code for running Glottal Closure Instants (GCI) detection using the fully-convol
 We kindly request academic publications making use of our FCN models to cite the aforementioned paper.
 
 ## Description
-The code provided in this repository aims at performing GCI dectection using a Fully-Convolutional Neural Network. Note that it also allows to perform the prediction of the glottal flow shape (normalized in amplitude) from which more information than the GCIs may be extracted.
+The code provided in this repository aims at performing GCI dectection using a Fully-Convolutional Neural Network. Note that it also allows to perform the prediction of the glottal flow shape (normalized in amplitude) from which more information than the GCIs may be extracted.<br>
 
-The provided code allows to run the GCI detection on given speech sound files using the provided pretrained models, but no code is currently provided to train the model on new data.
-All pre-trained models evaluated in the above-mentionned paper are provided.
-The models "FCN_synth_GF" and "FCN_synth_tri have been trained on a large database of high-quality synthetic speech (obtained by resynthesizing the BREF and TIMIT database using the PaN vocoder [4]). The difference between the 2 is that "FCN_synth_tri" predicts a triangular curve from which the GCIs are extracted by simple peak-picking on the maximums, while "FCN_synth_GF" predicts the glottal flow shape and performs the peak-picking on its negative derivative. The "FCN_CMU__10_90" and "FCN_CMU__60_20_20" models have been trained on the CMU database (with different train/validation/test splits) using a triangle shape as target.
+The provided code allows to run the GCI detection on given speech sound files using the provided pretrained models, but no code is currently provided to train the model on new data.<br>
+All pre-trained models evaluated in the above-mentionned paper are provided.<br>
+The models "FCN_synth_GF" and "FCN_synth_tri have been trained on a large database of high-quality synthetic speech (obtained by resynthesizing the BREF [1] and TIMIT [2] database using the PaN vocoder [3, and 4 Section 3.5.2]). The difference between those 2 models is that "FCN_synth_tri" predicts a triangular curve from which the GCIs are extracted by simple peak-picking on the maximums, while "FCN_synth_GF" predicts the glottal flow shape and performs the peak-picking on its negative derivative. The "FCN_CMU__10_90" and "FCN_CMU__60_20_20" models have been trained on the CMU database (with different train/validation/test splits) using a triangle shape as target.
 
-The models, algorithm, training, and evaluation procedures have been described in a publication entitled "GCI detection from raw speech using a fully-convolutional network" (https://arxiv.org/abs/1910.10235).
+The models, algorithm, training, and evaluation procedures, as well as the constitution of the databases, have been described in our publication "GCI detection from raw speech using a fully-convolutional network" (https://arxiv.org/abs/1910.10235).
 
-Below are the results of our evaluations comparing our models to the SEDREAMS and DPI algorithms, in terms of IDR, MR, FAR, and IDA. The evaluation has been conducted on both a test database of synthetic speech and two datasets of real speech samples from the CMU [XX] and PTDB-TUG [XX] databases). All model and algorithms have been evaluated on 16kHz audio.
+Below are the results of our evaluations comparing our models to the SEDREAMS [5] and DPI [6] algorithms, in terms of IDR, MR, FAR, and IDA. The evaluation has been conducted on both a test database of synthetic speech and two datasets of real speech samples from the CMU artic [7] and PTDB-TUG [8] databases). All model and algorithms have been evaluated on 16kHz audio.
 
 <div class="tg-wrap">
  <table>
@@ -150,8 +150,6 @@ Below are the results of our evaluations comparing our models to the SEDREAMS an
  </table>
 </div>
 
-Our synthetic speech database has been created by resynthesizing the BREF [2] and TIMIT [3] databases using the PAN synthesis engine, described in [4, Section 3.5.2].
-
 ## Example command-line usage (using provided pretrained models)
 TODO
 <!--
@@ -192,10 +190,19 @@ Example of prediction of glottal flow shape from real speech extract :
 ![Example of prediction of glottal flow shape from real speech extract](examples/figures/pred_GF.png?raw=true "Example of prediction of glottal flow shape from real speech extract")
 
 ## References
-[1] XXX
+[1] J. L. Gauvain, L. F. Lamel, and M. Eskenazi, "Design Considerations and Text Selection for BREF, a large French Read-Speech Corpus", 1st International Conference on Spoken Language Processing, ICSLP, http://www.limsi.fr/~lamel/kobe90.pdf
 
-[2] J. L. Gauvain, L. F. Lamel, and M. Eskenazi, “Design Considerations and Text Selection for BREF, a large French Read-Speech Corpus,” 1st International Conference on Spoken Language Processing, ICSLP, no. January 2013, pp. 1097–1100, 1990. http://www.limsi.fr/~lamel/kobe90.pdf
+[2] V. Zue, S. Seneff, and J. Glass, "Speech Database Development At MIT : TIMIT And Beyond"
 
-[3] V. Zue, S. Seneff, and J. Glass, “Speech Database Development At MIT : TIMIT And Beyond,” vol. 9, pp. 351–356, 1990.
+[3] Stefan Huber and Axel Roebel, "On glottal source shape parameter transformation using a novel deterministic and stochastic speech analysis and synthesis system", in Interspeech 2015
 
-[4] L. Ardaillon, “Synthesis and expressive transformation of singing voice,” Ph.D. dissertation, EDITE; UPMC-Paris 6 Sorbonne Universités, 2017.
+[4] L. Ardaillon, "Synthesis and expressive transformation of singing voice", Ph.D. dissertation, EDITE; UPMC-Paris 6 Sorbonne Universités, 2017 (Section 3.5.2 : "PaN engine")
+
+[5] Thomas Drugman and Thierry Dutoit, "Glottal Closure and Opening Instant Detection from Speech Signals", in Interspeech 2009
+
+[6] A P Prathosh, T V Ananthapadmanabha, A G Ramakrishnan, and Senior Member, "Epoch Extraction Based on Integrated Linear Prediction Residual Using Plosion Index"
+
+[7] John Kominek and Alan W Black, "THE CMU ARCTIC SPEECH DATABASES", in 5th ISCA Speech Synthesis Workshop, 2004
+
+[8] Gregor Pirker, Michael Wohlmayr, Stefan Petrik, and Franz Pernkopf, “A Pitch Tracking Corpus with Evaluation on Multipitch Tracking Scenario"
+
