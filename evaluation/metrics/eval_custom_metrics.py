@@ -4,7 +4,7 @@ Code for evaluation of GCI detection, using the "custom" metrics that consider a
 These are the metrics presented in table 2 of the paper
 "GCI detection from raw speech using a fully-convolutional network" (https://arxiv.org/abs/1910.10235)
 
-The metrics used in table 1 are based on the code from https://github.com/VarunSrivastavaIITD/DCNN, function "naylor_metrics"
+The metrics used in table 1 are based on the code from https://github.com/VarunSrivastavaIITD/DCNN, (file "metrics.py")
 following the definitions of : Patrick A Naylor, Anastasis Kounoudes, Jon Gudnason, and
 Mike Brookes, “Estimation of Glottal Closure Instants in Voiced Speech Using the DYPSA Algorithm,”
 '''
