@@ -69,10 +69,10 @@ python /path_to/FCN-f0/FCN_GCI.py /path_to/test.wav -f sdif
 
 ## Example figures
 Example of prediction of triangle shape from real speech extract :
-![Example of prediction of triangle shape from real speech extract](examples/figures/prediction_triangle_example.png?raw=true "Example of prediction of triangle shape from real speech extract")
+![Example of prediction of triangle shape from real speech extract](examples/figures/pred_triangle.png?raw=true "Example of prediction of triangle shape from real speech extract")
 
 Example of prediction of glottal flow shape from real speech extract :
-![Example of prediction of glottal flow shape from real speech extract](examples/figures/prediction_glottal_flow_example.png?raw=true "Example of prediction of glottal flow shape from real speech extract")
+![Example of prediction of glottal flow shape from real speech extract](examples/figures/pred_GF.png?raw=true "Example of prediction of glottal flow shape from real speech extract")
 
 ## References
 [1] XXX
