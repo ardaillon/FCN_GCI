@@ -161,7 +161,7 @@ if __name__ == '__main__':
 
     global_args = parser.add_argument_group('global')
     parser.add_argument('-i', "--input", nargs='+', default='./examples/speech16k-norm', help='path to one ore more WAV file(s) to analyze OR can be a directory')
-    global_args.add_argument('-o', "--output", default=None, help='output f0 analysis (either a directory or a file with sdif extension)')
+    global_args.add_argument('-o', "--output", default=None, help='output GCI analysis (either a directory or a file with sdif extension)')
     global_args.add_argument('-m', "--modelTag", default='FCN_synth_GF', help='name model to be used for prediction (default is FCN_synth_GF)')
 
     args = parser.parse_args()
